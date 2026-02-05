@@ -1,0 +1,54 @@
+name: 'multiple_datasets'
+sessions: 
+  - name: 'monkey_pfc'
+    file: '/oak/stanford/groups/henderj/nishalps/Moore/data/aq_20210927_cells.mat'
+    T_start: 90
+    bin_size: 10
+  - name: 'monkey_pfc'
+    file: '/oak/stanford/groups/henderj/nishalps/Moore/data/aq_20210929_cells.mat'
+    T_start: 90
+    bin_size: 10
+  - name: 'monkey_pfc'
+    file: '/oak/stanford/groups/henderj/nishalps/Moore/data/aq_20211001_cells.mat'
+    T_start: 90
+    bin_size: 10
+  - name: 'monkey_pfc'
+    file: '/oak/stanford/groups/henderj/nishalps/Moore/data/aq_20211007_cells.mat'
+    T_start: 90
+    bin_size: 10
+  - name: 'monkey_pfc'
+    file: '/oak/stanford/groups/henderj/nishalps/Moore/data/aq_20211008_cells.mat'
+    T_start: 90
+    bin_size: 10
+  - name: 'monkey_pfc'
+    file: '/oak/stanford/groups/henderj/nishalps/Moore/data/aq_20211011_cells.mat'
+    T_start: 90
+    bin_size: 10
+  - name: 'monkey_pfc'
+    file: '/oak/stanford/groups/henderj/nishalps/Moore/data/aq_20211015_cells.mat'
+    T_start: 90
+    bin_size: 10
+  - name: 'monkey_pfc'
+    file: '/oak/stanford/groups/henderj/nishalps/Moore/data/hb_20221017_cells.mat'
+    T_start: 90
+    bin_size: 10
+  - name: 'monkey_pfc'
+    file: '/oak/stanford/groups/henderj/nishalps/Moore/data/hb_20221019_cells.mat'
+    T_start: 90
+    bin_size: 10
+  - name: 'monkey_pfc'
+    file: '/oak/stanford/groups/henderj/nishalps/Moore/data/hb_20221021_cells.mat'
+    T_start: 90
+    bin_size: 10
+  - name: 'monkey_pfc'
+    file: '/oak/stanford/groups/henderj/nishalps/Moore/data/hb_20221024_cells.mat'
+    T_start: 90
+    bin_size: 10
+  - name: 'monkey_pfc'
+    file: '/oak/stanford/groups/henderj/nishalps/Moore/data/hb_20221026_cells.mat'
+    T_start: 90
+    bin_size: 10
+  - name: 'monkey_pfc'
+    file: '/oak/stanford/groups/henderj/nishalps/Moore/data/hb_20221027_cells.mat'
+    T_start: 90
+    bin_size: 10

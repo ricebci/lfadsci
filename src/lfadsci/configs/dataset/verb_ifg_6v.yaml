@@ -1,0 +1,4 @@
+name: 'multiple_datasets'
+sessions: 
+  - name: 'ifg_verb'
+  - name: '6v_verb'

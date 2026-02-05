@@ -1,0 +1,27 @@
+name: 'multiple_datasets'
+sessions: 
+  - name: 'monkey_pfc'
+    file: '/oak/stanford/groups/henderj/nishalps/Moore/data/hb_20221024_cells.mat'
+    T_start: 90
+    bin_size: 10
+    weight: 0.04
+  - name: 'maze'
+    bin_width: 5
+    total_length: 630
+    pre_length: 180
+    weight: 0.04
+  - name: 'two_fingers'
+    file: '/oak/stanford/groups/henderj/nishalps/gesture/t5.2021.10.25/data_15ms/'
+    time_steps_before_movement: 33
+    time_steps_after_movement: 30
+    weight: 0.04
+  - name: 'cvc_t12_2023_06_29'
+    weight: 0.04
+  - name: 'cvc_t15_2023_10_27'
+    weight: 0.04
+  - name: 'cvc_t15_2024_03_01'
+    weight: 0.72
+  - name: 'ifg_verb'
+    weight: 0.04
+  - name: 'ifg_noun'
+    weight: 0.04

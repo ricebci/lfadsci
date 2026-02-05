@@ -1,0 +1,4 @@
+name: 'two_fingers'
+file: '/oak/stanford/groups/henderj/nishalps/gesture/t5.2021.11.01/data_15ms/'
+time_steps_before_movement: 33
+time_steps_after_movement: 30

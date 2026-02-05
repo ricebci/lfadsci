@@ -1,0 +1,4 @@
+name: 'monkey_pfc'
+file: '/oak/stanford/groups/henderj/nishalps/Moore/data/hb_20221024_cells.mat'
+T_start: 90
+bin_size: 10

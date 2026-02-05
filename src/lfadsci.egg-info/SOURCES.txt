@@ -1,0 +1,5 @@
+setup.py
+src/lfadsci.egg-info/PKG-INFO
+src/lfadsci.egg-info/SOURCES.txt
+src/lfadsci.egg-info/dependency_links.txt
+src/lfadsci.egg-info/top_level.txt

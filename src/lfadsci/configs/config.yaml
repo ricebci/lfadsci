@@ -1,0 +1,50 @@
+hydra:
+  run:
+    dir: ${outputDir}
+  sweep:
+    dir: ${outputDir}
+    subdir: ${hydra.job.override_dirname}
+  job:
+    config:
+      override_dirname:
+        exclude_keys:
+          - outputDir
+          - loadDir
+          - wandb.enabled
+          - wandb.setup.project
+          - wandb.setup.entity
+          - wandb.setup.group
+          - mode
+
+defaults:
+  - dataset: maze
+  - model: lfads_bias_tv_input
+  - wandb: defaults
+
+# Specify which GPU to use (on multi-gpu machines, this prevents tensorflow from taking over all GPUs)
+gpuNumber: "0"
+
+#where to save the RNN files
+outputDir:
+loadDir:
+
+#this seed is set for numpy and tensorflow when the class is initialized
+seed: 98
+data_seed: 98
+
+#number of sentence snippets to include in the minibatch
+batch_size: 512
+
+#gradient to keep things reasonable
+train_frac: 0.6
+val_frac: 0.2
+test_frac: 0.2
+
+n_steps: 40000
+decay_factor: 0.95
+patience_till_lr_decay: 10
+lr_init: 0.0001
+lr_stop: 1e-6
+
+save_freq: 500
+mode: 'train'

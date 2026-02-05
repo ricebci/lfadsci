@@ -1,0 +1,4 @@
+name: 'maze'
+bin_width: 5
+total_length: 630
+pre_length: 180

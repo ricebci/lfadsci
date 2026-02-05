@@ -1,0 +1,42 @@
+### Architecture
+# Initial condition
+ic_dim: 128
+n_hidden_encode_ic: 128
+
+# Bias 
+n_hidden_encode_bias: 128
+bias_dim: 5
+generator_type: 'gru'
+use_bias: True
+
+# time-varying input
+n_hidden_encode_tv_input: 128
+tv_input_dim: 2
+tv_input_smoothness_alpha: 0
+use_tv_input: True
+
+# Generator
+n_hidden_decode: 128
+dropout_rate: 0.05
+n_dynamics: 1
+factors: 40
+
+# other training hyperparameters
+
+# kl_warmup_start: [500, 2000] # for IC and bias respectively
+# kl_warmup_end: [1000, 2500] # for IC and bias respectively
+# bias_warmup_start: 1500
+# bias_warmup_end: 2000
+
+# kl_warmup_start: 2000
+# kl_warmup_end: 2500
+
+kl_warmup_start: 500
+kl_warmup_end: 1000
+
+noise_stddev: 0.0
+lam_predict: 1
+lam_kl_ic: 1
+lam_l2: 0.1
+lam_kl_bias: 1
+lam_kl_tv_inp: 1

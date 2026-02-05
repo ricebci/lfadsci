@@ -1,0 +1,16 @@
+defaults:
+  - submitit_slurm
+
+timeout_min: 2880  # 2 days
+cpus_per_task: 4
+mem_gb: 64 # 32 
+partition: henderj,owners
+gpus_per_node: 1
+setup:
+  - ml load python/3.6.1 viz cudnn/8.1.1.33 cuda/11.2.0 py-scipy/1.1.0_py36 py-matplotlib/3.1.1_py36 py-pandas/1.0.3_py36 py-sympy/1.1.1_py36 py-numpy/1.17.2_py36 py-scikit-learn/0.24.2_py36 py-tensorflow/2.4.1_py36 py-jupyter/1.0.0_py36
+  - source /oak/stanford/groups/henderj/nishalps/venvs/lfads_ci/bin/activate
+additional_parameters:
+  # constraint: '[GPU_MEM:12GB|GPU_MEM:16GB|GPU_MEM:24GB|GPU_MEM:32GB|GPU_MEM:40GB|GPU_MEM:80GB]'
+  constraint: '[GPU_MEM:24GB|GPU_MEM:32GB|GPU_MEM:40GB|GPU_MEM:80GB]'
+  mail-type: ALL
+array_parallelism: 50
