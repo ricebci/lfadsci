@@ -172,11 +172,11 @@ def analysis_single_pts_pendulum(feature, cues, markersize=5,
 
     if idx_plot is None:
         background = False
-        idx_plot = np.arange(feature_2d.shape[0]).astype(np.int)
+        idx_plot = np.arange(feature_2d.shape[0]).astype(np.int64)
         print(idx_plot)
     else:
         background = True
-        idx_plot = np.array(idx_plot).astype(np.int)
+        idx_plot = np.array(idx_plot).astype(np.int64)
 
     if background: 
         idx_plot_others = np.setdiff1d(np.arange(feature_2d.shape[0]), idx_plot)

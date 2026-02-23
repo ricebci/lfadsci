@@ -25,10 +25,10 @@ def get_data_generator2(neural_trials, session_trials, cues_trials, delays_trial
         raise ValueError('train frac bigger than val and test frac')
         
     n_trials = np.array(neural_trials).shape[0]
-    train_idx = np.arange(np.int(n_trials * train_frac))
-    val_idx = np.arange(np.int(n_trials * (1 - val_frac - test_frac)), 
-                       np.int(n_trials * (1 - test_frac)))
-    test_idx = np.arange(np.int(n_trials * (1 - test_frac)), 
+    train_idx = np.arange(int(n_trials * train_frac))
+    val_idx = np.arange(int(n_trials * (1 - val_frac - test_frac)), 
+                       int(n_trials * (1 - test_frac)))
+    test_idx = np.arange(int(n_trials * (1 - test_frac)), 
                          n_trials)
     
     perm = np.random.RandomState(seed=seed).permutation(np.arange(n_trials))

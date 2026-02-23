@@ -31,10 +31,10 @@ def get_data_generator2(neural_trials, session_trials, cues_trials, delays_trial
         masks = masks.astype(np.bool)
 
     n_trials = np.array(neural_trials).shape[0]
-    train_idx = np.arange(np.int(n_trials * train_frac))
-    val_idx = np.arange(np.int(n_trials * (1 - val_frac - test_frac)),
-                        np.int(n_trials * (1 - test_frac)))
-    test_idx = np.arange(np.int(n_trials * (1 - test_frac)),
+    train_idx = np.arange(int(n_trials * train_frac))
+    val_idx = np.arange(int(n_trials * (1 - val_frac - test_frac)),
+                        int(n_trials * (1 - test_frac)))
+    test_idx = np.arange(int(n_trials * (1 - test_frac)),
                          n_trials)
 
     perm = np.random.RandomState(seed=seed).permutation(np.arange(n_trials))
@@ -130,7 +130,7 @@ def combine_datasets(data_list, train_frac=0.6, val_frac=0.2, test_frac=0.2, see
     print(f'Rescaled data weights: {data_weight_scaled} to account for  different number of samples accross datasets.')
 
     # create approximate number of repeats.
-    data_weight_int = np.ceil(np.array(data_weight_scaled) * 100).astype(np.int)
+    data_weight_int = np.ceil(np.array(data_weight_scaled) * 100).astype(np.int64)
     print(f'Number of repeats per dataset: {data_weight_int}')
 
     datagenerator_combined = {}
