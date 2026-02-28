@@ -1,11 +1,14 @@
 #!/bin/bash
+set -euo pipefail
 
+# Activate conda environment
+eval "$(conda shell.bash hook)"
 conda activate lfads
 
 # Pendulum task: single model fit
 python3 src/lfadsci/main.py \
     dataset=pendulum \
-    outputDir=./fits/ \
+    outputDir=$PWD/models \
     model.dropout_rate=0.0 \
     model.bias_dim=5 \
     model.ic_dim=5 \
@@ -17,4 +20,4 @@ python3 src/lfadsci/main.py \
     seed=98 \
     model.use_bias=True \
     model.use_tv_input=False \
-    mode='train'
+    mode='train'  # eval mode runs inference and saves outputs

@@ -1,13 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 
-ml load python/3.6.1 viz cudnn/8.1.1.33 cuda/11.2.0 py-scipy/1.1.0_py36 py-matplotlib/3.1.1_py36 py-pandas/1.0.3_py36 py-sympy/1.1.1_py36 py-numpy/1.17.2_py36 py-scikit-learn/0.24.2_py36 py-tensorflow/2.4.1_py36 py-jupyter/1.0.0_py36
-source /oak/stanford/groups/henderj/nishalps/venvs/lfads_ci/bin/activate
+# Activate conda environment
+eval "$(conda shell.bash hook)"
+conda activate lfads
 
 # Pendulum task: hyperparameter sweep (Hydra multirun)
-python3 /oak/stanford/groups/henderj/nishalps/code/lfads_ci/src/lfadsci/main.py --multirun hydra/launcher=gpu_slurm \
+python3 src/lfadsci/main.py --multirun \
     dataset=pendulum \
-    outputDir=/scratch/users/nishalps/seq_models/pendulum/ \
+    outputDir=$PWD/models/ \
     model.dropout_rate=0.0 \
     model.bias_dim=10 \
     model.ic_dim=10 \
