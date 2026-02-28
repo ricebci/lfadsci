@@ -57,20 +57,36 @@ To verify that the installation was successful:
 python -c "import lfadsci; print('lfadsci successfully installed')"
 ```
 
-## Usage
+## Pendulum simulation: train and analyze
 
-Once installed, you can import and use lfadsci in your Python scripts or Jupyter notebooks.
+The pendulum example generates synthetic neural data from pendulum dynamics (with varying gravity conditions), trains an LFADS model, runs fixed-point analysis, and visualizes learned latent dynamics.
 
-## Development
+Start by running the single-fit shell workflow:
 
-To work with Jupyter notebooks:
 ```bash
-conda activate lfads
-jupyter lab
+bash scripts/pendulum.sh
 ```
 
-The environment includes JupyterLab and IPywidgets for interactive development.
+Alternatively, you can fit and analyze interactively in the notebook:
+
+```bash
+jupyter lab notebooks/pendulum.ipynb
+```
+
+The notebook covers:
+- data generation (`pendulum` dataset)
+- model build + training
+- loading cached `results_partial.pkl` / `results_full.pkl` when available or computing them within the notebook.
+- fixed-point and eigenvalue analysis
+- visualization of states, bias, initial conditions, and fixed points
+
+## Hyperparameter search (Hydra)
+
+You can also run Hydra multirun sweeps for pendulum hyperparameter search. See:
+
+- [scripts/pendulum_parameter_sweep.sh](scripts/pendulum_parameter_sweep.sh)
 
 # Multi-session training
 
+# Adding a new dataset
 
