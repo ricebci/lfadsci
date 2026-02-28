@@ -67,31 +67,31 @@ def get_session(config, session_id=0):
     
     print('getting %s data' % (config['name']))
 
-    if config['name'] == 'two_fingers':
-        if 'num_fingers_moving' not in config.keys():
-            num_fingers_moving = None
-        else: 
-            num_fingers_moving = config['num_fingers_moving']
-        neural_trials, cues_trials, delays_trials, session_trials = utils_fingers.get_data([config['file']], 
-                                                                             make_trials_same_length=True, 
-                                                                             time_steps_before_movement=config['time_steps_before_movement'], 
-                                                                             time_steps_after_movement=config['time_steps_after_movement'],
-                                                                             num_fingers_moving=num_fingers_moving)
+    # if config['name'] == 'two_fingers':
+    #     if 'num_fingers_moving' not in config.keys():
+    #         num_fingers_moving = None
+    #     else: 
+    #         num_fingers_moving = config['num_fingers_moving']
+    #     neural_trials, cues_trials, delays_trials, session_trials = utils_fingers.get_data([config['file']], 
+    #                                                                          make_trials_same_length=True, 
+    #                                                                          time_steps_before_movement=config['time_steps_before_movement'], 
+    #                                                                          time_steps_after_movement=config['time_steps_after_movement'],
+    #                                                                          num_fingers_moving=num_fingers_moving)
         
-        session_trials = session_trials -1 + session_id
-        return {'neural': neural_trials, 'cues': cues_trials, 
-                'delays': delays_trials, 'session_id': session_trials, 
-                'task': 'finger_t5'}
+    #     session_trials = session_trials -1 + session_id
+    #     return {'neural': neural_trials, 'cues': cues_trials, 
+    #             'delays': delays_trials, 'session_id': session_trials, 
+    #             'task': 'finger_t5'}
 
-    if config['name'] == 'maze':
-        spikes_trials, hand_pos_trials, hand_vel_trials, label_trials = utils_mcmaze.get_data(bin_width=config['bin_width'],
-                                                                                   total_length=config['total_length'], 
-                                                                                   pre_length=config['pre_length']) 
-        session_trials =  np.array([[1] for _ in spikes_trials])
-        session_trials = session_trials -1 + session_id
-        return {'neural': spikes_trials, 'cues': label_trials, 
-               'delays': hand_vel_trials, #[[''] for _ in spikes_trials], use velocity for delays
-               'session_id': session_trials, 'task': 'maze_monkey'} 
+    # if config['name'] == 'maze':
+    #     spikes_trials, hand_pos_trials, hand_vel_trials, label_trials = utils_mcmaze.get_data(bin_width=config['bin_width'],
+    #                                                                                total_length=config['total_length'], 
+    #                                                                                pre_length=config['pre_length']) 
+    #     session_trials =  np.array([[1] for _ in spikes_trials])
+    #     session_trials = session_trials -1 + session_id
+    #     return {'neural': spikes_trials, 'cues': label_trials, 
+    #            'delays': hand_vel_trials, #[[''] for _ in spikes_trials], use velocity for delays
+    #            'session_id': session_trials, 'task': 'maze_monkey'} 
 
 
     if config['name'] == 'pendulum':
@@ -102,68 +102,68 @@ def get_session(config, session_id=0):
                 'task': 'pendulum'}
 
 
-    if config['name'] == 'monkey_pfc':
-        neural_trials, cues_trials, delays_trials, session_trials = utils_monkey_pfc.get_data_monkey_pfc(filename=config['file'], 
-                    T_start=config['T_start'], 
-                    bin_size=config['bin_size'], 
-                    remove_duplicate_channels=True)
-        session_trials = session_trials -1 + session_id
-        return {'neural': neural_trials, 'cues': cues_trials, 
-                'delays': delays_trials, 'session_id': session_trials, 
-                'task': 'monkey_pfc'}
+    # if config['name'] == 'monkey_pfc':
+    #     neural_trials, cues_trials, delays_trials, session_trials = utils_monkey_pfc.get_data_monkey_pfc(filename=config['file'], 
+    #                 T_start=config['T_start'], 
+    #                 bin_size=config['bin_size'], 
+    #                 remove_duplicate_channels=True)
+    #     session_trials = session_trials -1 + session_id
+    #     return {'neural': neural_trials, 'cues': cues_trials, 
+    #             'delays': delays_trials, 'session_id': session_trials, 
+    #             'task': 'monkey_pfc'}
 
-    if config['name'] == 'cvc_t12_2023_06_29':
-        neural_trials, cues_trials, delays_trials, session_trials = utils_cvc.get_data_t12_2023_06_29()
-        session_trials = session_trials -1 + session_id
-        return {'neural': neural_trials, 'cues': cues_trials, 
-                'delays': delays_trials, 'session_id': session_trials, 
-                'task': 'cvc_t12_2023_06_29'}
+    # if config['name'] == 'cvc_t12_2023_06_29':
+    #     neural_trials, cues_trials, delays_trials, session_trials = utils_cvc.get_data_t12_2023_06_29()
+    #     session_trials = session_trials -1 + session_id
+    #     return {'neural': neural_trials, 'cues': cues_trials, 
+    #             'delays': delays_trials, 'session_id': session_trials, 
+    #             'task': 'cvc_t12_2023_06_29'}
 
-    if config['name'] == 'cvc_t15_2023_10_27':
-        neural_trials, cues_trials, delays_trials, session_trials = utils_cvc.get_data_t15_2023_10_27(trial_stop_=200, channels=np.arange(256))
-        session_trials = session_trials -1 + session_id
-        return {'neural': neural_trials, 'cues': cues_trials, 
-                'delays': delays_trials, 'session_id': session_trials, 
-                'task': 'cvc_t15_2023_10_27'}
+    # if config['name'] == 'cvc_t15_2023_10_27':
+    #     neural_trials, cues_trials, delays_trials, session_trials = utils_cvc.get_data_t15_2023_10_27(trial_stop_=200, channels=np.arange(256))
+    #     session_trials = session_trials -1 + session_id
+    #     return {'neural': neural_trials, 'cues': cues_trials, 
+    #             'delays': delays_trials, 'session_id': session_trials, 
+    #             'task': 'cvc_t15_2023_10_27'}
 
-    if config['name'] == 'cvc_t15_2024_03_01':
-        neural_trials, cues_trials, delays_trials, session_trials = utils_cvc.get_data_t15_2024_03_01(trial_stop_=200, channels=np.arange(256))
-        session_trials = session_trials -1 + session_id
-        return {'neural': neural_trials, 'cues': cues_trials, 
-                'delays': delays_trials, 'session_id': session_trials, 
-                'task': 'cvc_t15_2024_03_01'}    
+    # if config['name'] == 'cvc_t15_2024_03_01':
+    #     neural_trials, cues_trials, delays_trials, session_trials = utils_cvc.get_data_t15_2024_03_01(trial_stop_=200, channels=np.arange(256))
+    #     session_trials = session_trials -1 + session_id
+    #     return {'neural': neural_trials, 'cues': cues_trials, 
+    #             'delays': delays_trials, 'session_id': session_trials, 
+    #             'task': 'cvc_t15_2024_03_01'}    
     
-    if config['name'] == 'ifg_verb':
-        neural_trials, cues_trials, delays_trials, session_trials = utils_ifg_operator.get_data_ifg(
-            channels=np.arange(128, 256), features=['binnedTX'], task='verb_conjugation')
-        session_trials = session_trials -1 + session_id
-        return {'neural': neural_trials, 'cues': cues_trials, 
-                'delays': delays_trials, 'session_id': session_trials, 
-                'task': 'ifg_verb'} 
+    # if config['name'] == 'ifg_verb':
+    #     neural_trials, cues_trials, delays_trials, session_trials = utils_ifg_operator.get_data_ifg(
+    #         channels=np.arange(128, 256), features=['binnedTX'], task='verb_conjugation')
+    #     session_trials = session_trials -1 + session_id
+    #     return {'neural': neural_trials, 'cues': cues_trials, 
+    #             'delays': delays_trials, 'session_id': session_trials, 
+    #             'task': 'ifg_verb'} 
 
-    if config['name'] == '6v_verb':
-        neural_trials, cues_trials, delays_trials, session_trials = utils_ifg_operator.get_data_ifg(
-            channels=np.arange(128), features=['binnedTX'], task='verb_conjugation')
-        session_trials = session_trials -1 + session_id
-        return {'neural': neural_trials, 'cues': cues_trials, 
-                'delays': delays_trials, 'session_id': session_trials, 
-                'task': '6v_verb'} 
+    # if config['name'] == '6v_verb':
+    #     neural_trials, cues_trials, delays_trials, session_trials = utils_ifg_operator.get_data_ifg(
+    #         channels=np.arange(128), features=['binnedTX'], task='verb_conjugation')
+    #     session_trials = session_trials -1 + session_id
+    #     return {'neural': neural_trials, 'cues': cues_trials, 
+    #             'delays': delays_trials, 'session_id': session_trials, 
+    #             'task': '6v_verb'} 
 
-    if config['name'] == 'ifg_noun':
-        neural_trials, cues_trials, delays_trials, session_trials = utils_ifg_operator.get_data_ifg(
-            channels=np.arange(128, 256), features=['binnedTX'], task='noun_pluralization')
-        session_trials = session_trials -1 + session_id
-        return {'neural': neural_trials, 'cues': cues_trials, 
-                'delays': delays_trials, 'session_id': session_trials, 
-                'task': 'ifg_noun'} 
+    # if config['name'] == 'ifg_noun':
+    #     neural_trials, cues_trials, delays_trials, session_trials = utils_ifg_operator.get_data_ifg(
+    #         channels=np.arange(128, 256), features=['binnedTX'], task='noun_pluralization')
+    #     session_trials = session_trials -1 + session_id
+    #     return {'neural': neural_trials, 'cues': cues_trials, 
+    #             'delays': delays_trials, 'session_id': session_trials, 
+    #             'task': 'ifg_noun'} 
 
-    if config['name'] == '6v_noun':
-        neural_trials, cues_trials, delays_trials, session_trials = utils_ifg_operator.get_data_ifg(
-            channels=np.arange(128), features=['binnedTX'], task='noun_pluralization')
-        session_trials = session_trials -1 + session_id
-        return {'neural': neural_trials, 'cues': cues_trials, 
-                'delays': delays_trials, 'session_id': session_trials, 
-                'task': '6v_noun'} 
+    # if config['name'] == '6v_noun':
+    #     neural_trials, cues_trials, delays_trials, session_trials = utils_ifg_operator.get_data_ifg(
+    #         channels=np.arange(128), features=['binnedTX'], task='noun_pluralization')
+    #     session_trials = session_trials -1 + session_id
+    #     return {'neural': neural_trials, 'cues': cues_trials, 
+    #             'delays': delays_trials, 'session_id': session_trials, 
+    #             'task': '6v_noun'} 
 
 
 def get_data(config):
