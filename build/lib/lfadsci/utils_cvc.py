@@ -56,7 +56,7 @@ def get_data_t12_2023_06_29():
     session_trials = np.ones((len(neural_trials), 1))
 
     L = np.min([n.shape[0] for n in neural_trials])
-    L = np.int(0.6 * L)
+    L = int(0.6 * L)
     neural_trials = [n[:L, :].astype(np.float32) for n in neural_trials]
 
 

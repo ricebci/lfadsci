@@ -17,7 +17,7 @@ hydra:
           - mode
 
 defaults:
-  - dataset: maze
+  - dataset: pendulum
   - model: lfads_bias_tv_input
   - wandb: defaults
 

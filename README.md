@@ -1,92 +1,135 @@
-# lfads_ci
+# Contextual Latent Factor Analysis via Dynamical Systems
+
+![Model Architecture](docs/model_architecture.png)
+
+## Overview
+
+LFADS is a framework for learning interpretable dynamics from high-dimensional neural recordings. This implementation extends the original LFADS with a learned, **context-dependent per-trial bias** that improves interpretability by separating trial-specific variations from the underlying latent dynamical system usin.
 
 
+### Paper
 
-## Getting started
+*Improved interpretability in LFADS models using a learned, context-dependent per-trial bias*
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Nishal P. Shah, Benyamin Abramovich Krasa, Erin Kunz, Nick Hahn, Foram Kamdar, Donald Avansino, Leigh R. Hochberg, Jaimie M. Henderson, David Sussillo, bioRxiv 2025
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+[Paper link](https://www.biorxiv.org/content/10.1101/2025.10.03.680303v1)
 
-## Add your files
+### Abstract
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+The computation-through-dynamics perspective argues that biological neural circuits process information via the continuous evolution of their internal states. Inspired by this perspective, Latent Factor Activity using Dynamical systems (LFADS) identifies a generative model consistent with the neural activity recordings. LFADS models neural dynamics with a recurrent neural network (RNN) generator, which results in excellent fit to the data. However, it has been difficult to understand the dynamics of the LFADS generator. In this work, we show that this poor interpretability arises in part because the generator implements complex, multi-stable dynamics.
 
-```
-cd existing_repo
-git remote add origin https://code.stanford.edu/nishalps/lfads_ci.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://code.stanford.edu/nishalps/lfads_ci/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+We introduce a simple modification to LFADS that ameliorates issues with interpretability by providing an inferred per-trial bias (modeled as a constant input) to the RNN generator, enabling it to contextually adapt a simpler dynamical system to individual trials. In both simulated neural recordings from pendulum oscillations and real recordings during arm movements in nonhuman primates, we observed that the standard LFADS learned complex, multi-stable dynamics, whereas the modified LFADS learned easier-to-understand contextual dynamics. This enabled direct analysis of the generator, which reproduced at a single-trial level previous results shown only through more complex analyses at the trial average. Finally, we applied the per-trial inferred bias LFADS model to human intracortical brain computer interface recordings during attempted finger movements and speech. We show that modifying neural dynamics using linear operations of the per-trial bias addresses non-stationarity and identifies the extent of behavioral variability, problems known to plague BCI. We call our modification to LFADS as "contextual LFADS".
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+### Prerequisites
+- Python 3.9 or higher
+- Conda (Miniconda or Anaconda)
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### Setup Instructions
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+1. **Create a new conda environment:**
+```bash
+conda create -n lfads python=3.9 -y
+```
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+2. **Activate the environment:**
+```bash
+conda activate lfads
+```
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+3. **Install the lfadsci package in development mode:**
+```bash
+pip install -e .
+```
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+By default, this installs **TensorFlow CPU** (`tensorflow-cpu==2.7.0`).
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+4. **(Optional) Install with GPU TensorFlow:**
+```bash
+LFADSCI_GPU=1 pip install -e .
+```
 
-## License
-For open source projects, say how it is licensed.
+If you already installed the CPU version and want to switch to GPU:
+```bash
+pip uninstall -y tensorflow-cpu tensorflow
+LFADSCI_GPU=1 pip install --force-reinstall -e .
+```
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+This will install all required dependencies including:
+- TensorFlow (CPU by default, GPU when `LFADSCI_GPU=1`)
+- Hydra (configuration framework)
+- Jupyter Lab and Jupyter Notebook support
+- Scientific computing libraries (NumPy, SciPy, Pandas, Scikit-learn)
+- Visualization tools (Seaborn, Matplotlib)
+- Weights & Biases (experiment tracking)
+
+### Verify Installation
+
+To verify that the installation was successful:
+```bash
+python -c "import lfadsci; print('lfadsci successfully installed')"
+```
+
+## Preparing Data
+
+To train LFADS models on your own data, you need to create a data loader that returns four arrays:
+
+1. **`neural_trials`** - List of neural activity timeseries across trials. Each element is a 2D array of shape (time, neurons) containing spike counts or firing rates for a single trial.
+
+2. **`cues_trials`** - List of task cues or conditions associated with each trial. Used only for analysis and visualization, not for model training.
+
+3. **`delays_trials`** - List of delay periods or kinematic labels associated with each trial. Used only for analysis, not for model training.
+
+4. **`session_trials`** - List of session IDs (integers) associated with each trial. Each trial is assigned a session ID, which switches a linear filter in both the encoder and generator during training. Only neural activity and session ID are used during model training.
+
+**Example:** See [src/lfadsci/utils_pendulum.py](src/lfadsci/utils_pendulum.py) for a reference implementation. The pendulum dataset generator shows how to structure data for LFADS:
+- It generates synthetic neural data from pendulum dynamics
+- Assigns each trial a gravity condition (cue)
+- Tracks session membership for model training
+- Returns all four arrays in the required format
+
+Once your data loader is ready, create a configuration file in `src/lfadsci/configs/dataset/` following the structure of existing configs (e.g., `pendulum.yaml`), specifying the data loader function and parameters.
+
+## Pendulum simulation: train and analyze
+
+The pendulum example generates synthetic neural data from pendulum dynamics (with varying gravity conditions), trains an LFADS model, runs fixed-point analysis, and visualizes learned latent dynamics.
+
+Start by running the single-fit shell workflow:
+
+```bash
+bash scripts/pendulum.sh
+```
+
+Alternatively, you can fit and analyze interactively in the notebook:
+
+```bash
+jupyter lab notebooks/pendulum.ipynb
+```
+
+The notebook covers:
+- data generation (`pendulum` dataset)
+- model build + training
+- loading cached `results_partial.pkl` / `results_full.pkl` when available or computing them within the notebook.
+- fixed-point and eigenvalue analysis
+- visualization of states, bias, initial conditions, and fixed points
+
+## Hyperparameter search (Hydra)
+
+You can also run Hydra multirun sweeps for pendulum hyperparameter search. See:
+
+- [scripts/pendulum_parameter_sweep.sh](scripts/pendulum_parameter_sweep.sh)
+
+## Multi-session training
+
+When training on multiple sessions, the model includes a session-specific linear filter in the generator that transforms the latent factors for each session. Additionally, the learned bias can differ across trials. This means session-specific differences can be absorbed by either the session-specific linear filter or the per-trial bias term.
+
+**Important for analysis:** You must be careful when interpreting multi-session models. You cannot directly compare biases across sessions to understand session differences, since those differences could be encoded in the session-specific linear filter instead. 
+
+**Valid analyses within a session:** You can safely compare per-trial biases across conditions *within the same session* to understand how the latent dynamics differ for different task conditions. This analysis is valid because the session-specific filter is constant within a session.
+
+**Across-session comparisons:** For comparing activity or dynamics across sessions, examine the latent factors and dynamics directly (e.g., fixed points, eigenvalues) rather than relying on bias alone.
+
+
+

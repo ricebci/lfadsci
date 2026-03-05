@@ -38,7 +38,7 @@ def get_data_verb_conjugation():
     session_trials = np.ones((len(neural_trials), 1))
 
     L = np.min([n.shape[0] for n in neural_trials])
-    L = np.int(0.6 * L)
+    L = int(0.6 * L)
     neural_trials = [n[:L, :].astype(np.float32) for n in neural_trials]
 
 
@@ -117,8 +117,8 @@ def get_data_ifg(channels=None, features=['binnedTX', 'spikePower'], task='verb_
 
 
 def snip_trials(neural_trials, dt=0.02, t_min=0, t_max=0):
-    t_min_idx = np.floor(t_min / dt).astype(np.int)
-    t_max_idx = np.ceil(t_max / dt).astype(np.int)
+    t_min_idx = np.floor(t_min / dt).astype(np.int64)
+    t_max_idx = np.ceil(t_max / dt).astype(np.int64)
     n = [n[t_min_idx: t_max_idx, ...] for n in neural_trials]
     return n
 
@@ -155,7 +155,7 @@ def convert_cues_to_idx(cues, cue_idx_map=None):
 def analysis_single_pts_ifg(feature, cues, markersize=5, 
                              method='tdr', new_fig=True, ax=None, idx_plot=None, cue_idx_map=None):
     
-    cue_idx = np.array(convert_cues_to_idx(cues, cue_idx_map=cue_idx_map)).astype(np.int)
+    cue_idx = np.array(convert_cues_to_idx(cues, cue_idx_map=cue_idx_map)).astype(np.int64)
 
     if method == 'pca':
         from sklearn.decomposition import PCA
@@ -175,11 +175,11 @@ def analysis_single_pts_ifg(feature, cues, markersize=5,
 
     if idx_plot is None:
         background = False
-        idx_plot = np.arange(feature_2d.shape[0]).astype(np.int)
+        idx_plot = np.arange(feature_2d.shape[0]).astype(np.int64)
         print(idx_plot)
     else:
         background = True
-        idx_plot = np.array(idx_plot).astype(np.int)
+        idx_plot = np.array(idx_plot).astype(np.int64)
 
     if background: 
         ax.plot(feature_2d[:, 0], 
@@ -195,7 +195,7 @@ def analysis_single_pts_ifg(feature, cues, markersize=5,
 def ev_plot_ifg(datasets, results, ax=None, sz_scale=0.1, movement_colors=True, cmap='hsv'):
     
     cues = datasets['train']['cues']
-    cue_idx = np.array(convert_cues_to_idx(cues, cue_idx_map=None)).astype(np.int)
+    cue_idx = np.array(convert_cues_to_idx(cues, cue_idx_map=None)).astype(np.int64)
 
     sizes = []
     colors = []

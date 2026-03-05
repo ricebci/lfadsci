@@ -31,7 +31,7 @@ def get_data_monkey_pfc(filename='/oak/stanford/groups/henderj/nishalps/Moore/da
 
     frMat = data['frMat']
     frMat_lr = np.zeros((frMat.shape[0], 
-                         np.floor(frMat.shape[1] / bin_size).astype(np.int), 
+                         np.floor(frMat.shape[1] / bin_size).astype(np.int64), 
                          frMat.shape[2]))
     for iitime, itime in enumerate(np.arange(0, frMat.shape[1], bin_size)):
         frMat_lr[:, iitime, :] = frMat[:, itime: itime + bin_size, :].sum(-2)
@@ -352,11 +352,11 @@ def analysis_single_pts_pfc(feature, cues, ax=None, method='tdr', plot_means=Tru
     
     if idx_plot is None:
         background = False
-        idx_plot = np.arange(feature_2d.shape[0]).astype(np.int)
+        idx_plot = np.arange(feature_2d.shape[0]).astype(np.int64)
         print(idx_plot)
     else:
         background = True
-        idx_plot = np.array(idx_plot).astype(np.int)
+        idx_plot = np.array(idx_plot).astype(np.int64)
 
     if background: 
         ax.plot(feature_2d[:, 0], 

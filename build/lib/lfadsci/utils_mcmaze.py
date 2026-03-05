@@ -101,11 +101,11 @@ def analysis_single_pts_maze(feature, cues, t_start=10, t_end=25, markersize=5,
 
     if idx_plot is None:
         background = False
-        idx_plot = np.arange(feature_2d.shape[0]).astype(np.int)
+        idx_plot = np.arange(feature_2d.shape[0]).astype(np.int64)
         print(idx_plot)
     else:
         background = True
-        idx_plot = np.array(idx_plot).astype(np.int)
+        idx_plot = np.array(idx_plot).astype(np.int64)
 
     if background: 
         ax.plot(feature_2d[:, 0], 
