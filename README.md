@@ -121,6 +121,28 @@ You can also run Hydra multirun sweeps for pendulum hyperparameter search. See:
 
 - [scripts/pendulum_parameter_sweep.sh](scripts/pendulum_parameter_sweep.sh)
 
+### T19 finger workflow (train to `results_partial.pkl`)
+
+To mirror the notebook workflow for T19 up to partial posterior outputs (without fixed-point analysis), run:
+
+```bash
+python3 src/lfadsci/t19_train_partial.py
+```
+
+This script:
+- loads T19 `.mat` data,
+- trains LFADS,
+- computes posterior-sampled outputs via `compile_results`,
+- writes `results_partial.pkl` under `outputDir`.
+
+For Hydra multirun sweeps over training/model hyperparameters (including `n_steps`, `model.n_hidden_decode`, and `model.factors`), run:
+
+```bash
+bash scripts/t19_partial_parameter_sweep.sh
+```
+
+The T19 sweep script is dual-GPU aware: it launches two concurrent Hydra workers, pinned to `gpuNumber=0` and `gpuNumber=1`, and splits seeds across GPUs for better throughput.
+
 ## Multi-session training
 
 When training on multiple sessions, the model includes a session-specific linear filter in the generator that transforms the latent factors for each session. Additionally, the learned bias can differ across trials. This means session-specific differences can be absorbed by either the session-specific linear filter or the per-trial bias term.

@@ -1,3 +1,1 @@
-finger_data_utils
 lfadsci
-main
